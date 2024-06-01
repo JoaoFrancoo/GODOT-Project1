@@ -1,0 +1,120 @@
+[gd_scene load_steps=11 format=3 uid="uid://lamqs3kuxgvp"]
+
+[ext_resource type="Texture2D" uid="uid://b6trcebo4wjux" path="res://Title GameOver Screen/title-screen.jpg" id="1_wdniw"]
+[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_y3qqw"]
+[ext_resource type="Texture2D" uid="uid://lq6jkua7rdcx" path="res://Title GameOver Screen/game_logo.png" id="2_a1vrk"]
+[ext_resource type="Texture2D" uid="uid://pv0iik6526ee" path="res://assets/sprites/knight.png" id="3_jusue"]
+
+[sub_resource type="Theme" id="Theme_i7n2p"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl0ox"]
+atlas = ExtResource("3_jusue")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v67yh"]
+atlas = ExtResource("3_jusue")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1l5g"]
+atlas = ExtResource("3_jusue")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyoqr"]
+atlas = ExtResource("3_jusue")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0uake"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kl0ox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v67yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1l5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyoqr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y3qqw")
+
+[node name="Bg" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = -74.0
+offset_top = -19.0
+offset_right = 1152.0
+offset_bottom = 628.0
+texture = ExtResource("1_wdniw")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 26.0
+offset_right = -27.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="gamelogo" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_a1vrk")
+
+[node name="start_btn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_i7n2p")
+text = "START"
+
+[node name="credits_btn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "CREDITOS"
+
+[node name="quit_btn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "SAIR"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+expand_mode = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/HBoxContainer/TextureRect"]
+position = Vector2(-22, 272)
+scale = Vector2(9.03125, 8.96875)
+sprite_frames = SubResource("SpriteFrames_0uake")
+autoplay = "default"
+frame_progress = 0.137172
+centered = false
+flip_h = true
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/start_btn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/credits_btn" to="." method="_on_credits_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/quit_btn" to="." method="_on_quit_btn_pressed"]
